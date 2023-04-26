@@ -69,7 +69,7 @@ Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners abo
 
 Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
 
-1. Julia found out that the owners of the FIRST and the LAST TWO dogs actually have cats, not dogs! So create a shallow copy of Julia's array, and remove the cat ages from that copied array (because it's a bad practice to mutate function parameters)
+1. Julia found out that the owners of the FIRST and the LAST TWO{i did only last one } dogs actually have cats, not dogs! So create a shallow copy of Julia's array, and remove the cat ages from that copied array (because it's a bad practice to mutate function parameters)
 2. Create an array with both Julia's (corrected) and Kate's data
 3. For each remaining dog, log to the console whether it's an adult ("Dog number 1 is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 🐶")
 4. Run the function for both test datasets
@@ -109,31 +109,36 @@ const adultORpuppy = (testJulia, tasteKate) => {
   // julia
   testJulia.forEach((dogs, i) => {
     if (dogs >= 3) {
-      console.log(`JULIA: Dog number ${i} is an adult and ${dogs} years old`);
+      console.log(
+        `JULIA: Dog number ${i + 1} is an adult and ${dogs} years old`
+      );
     } else {
       console.log(
-        `JULIA: Dog number ${i} is still a puppy and ${dogs} years old`
+        `JULIA: Dog number ${i + 1} is still a puppy and ${dogs} years old`
       );
     }
   });
   // kate
   tasteKate.forEach((dogs, i) => {
     if (dogs >= 3) {
-      console.log(`KATE: Dog number ${i} is an adult and ${dogs} years old`);
+      console.log(
+        `KATE: Dog number ${i + 1} is an adult and ${dogs} years old`
+      );
     } else {
       console.log(
-        `KATE: Dog number ${i} is still a puppy and ${dogs} years old`
+        `KATE: Dog number ${i + 1} is still a puppy and ${dogs} years old`
       );
     }
   });
 };
-checkDogs(dogsJulinaData, dogsKateData);
-checkDogs(dogsJulinaData2, dogsKateData2);
+// ____________ comment out the function call
 
-/*
+// checkDogs(dogsJulinaData, dogsKateData);
+// checkDogs(dogsJulinaData2, dogsKateData2);
+
 ///////////////////////////////////////
 // Coding Challenge #2
-
+/*
 Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
 
 Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
@@ -146,9 +151,24 @@ Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages (
 TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
-GOOD LUCK 😀
+GOOD LUCK 😀*/
+const dogAges1 = [5, 2, 4, 1, 15, 8, 3];
+const dogAges2 = [16, 6, 10, 5, 6, 1, 4];
+const calcAverageHumanAge = ages => {
+  const humanAge = ages.map(age => (age < 2 ? 2 * age : 16 + age * 4));
+  const filteredAge = humanAge.filter(age => age >= 18);
 
+  const averageAge = Math.floor(
+    filteredAge.reduce((acc, age) => acc + age, filteredAge.at(0)) /
+      filteredAge.length
+  );
+  return averageAge;
+};
+const average1 = calcAverageHumanAge(dogAges1);
+const average2 = calcAverageHumanAge(dogAges2);
+console.log('avg1', average1, 'avg2', average2);
 
+/*
 ///////////////////////////////////////
 // Coding Challenge #3
 
