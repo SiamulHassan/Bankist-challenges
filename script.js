@@ -170,7 +170,7 @@ console.log('avg1', average1, 'avg2', average2);
 
 /*
 ///////////////////////////////////////
-// Coding Challenge #3
+// Coding Challenge #3 :::::: SKIPPED BY ME -> IT'S SUPER EASY
 
 Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
 
@@ -178,6 +178,35 @@ TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
+*/
+//////////////////////////////////////////
+//////////////////////////////////////////
+////// ARRAY METHODS PRACTICE::::focused on reduce() method
+// 1. calculate total number of deposits grater than 1000
+// NOTEa: we must always need to return the acc somehow
+const dep1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, dep) => (dep >= 1000 ? acc + 1 : acc), 0);
+console.log('TOTAL NUMBER OF DEPOSITE :', dep1000);
+/// alternative solutions
+const deposite1000 = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov >= 1000).length;
+console.log('alternative solution:', deposite1000);
+
+//////////// Reduce initial value can also be an object or array
+const total = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (acc, currSum) => {
+      currSum > 0
+        ? (acc.deposite = acc.deposite + currSum)
+        : (acc.withdrawl = acc.withdrawl + currSum);
+      return acc; // this means you are compled to retrun acc And it returns the acc object.
+    },
+    { deposite: 0, withdrawl: 0 }
+  );
+console.log('total:::::', total);
 
 ///////////////////////////////////////
 // Coding Challenge #4
