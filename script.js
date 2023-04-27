@@ -195,7 +195,7 @@ const deposite1000 = accounts
 console.log('alternative solution:', deposite1000);
 
 //////////// Reduce initial value can also be an object or array
-const total = accounts
+const { deposite, withdrawl } = accounts
   .flatMap(acc => acc.movements)
   .reduce(
     (acc, currSum) => {
@@ -206,8 +206,8 @@ const total = accounts
     },
     { deposite: 0, withdrawl: 0 }
   );
-console.log('total:::::', total);
-
+// console.log('total:::::', total);
+console.log(deposite, withdrawl);
 ///////////////////////////////////////
 // Coding Challenge #4
 
