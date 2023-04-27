@@ -199,15 +199,19 @@ const { deposite, withdrawl } = accounts
   .flatMap(acc => acc.movements)
   .reduce(
     (acc, currSum) => {
-      currSum > 0
-        ? (acc.deposite = acc.deposite + currSum)
-        : (acc.withdrawl = acc.withdrawl + currSum);
+      // currSum > 0
+      //   ? (acc.deposite = acc.deposite + currSum)
+      //   : (acc.withdrawl = acc.withdrawl + currSum);
+      acc[currSum > 0 ? 'deposite' : 'withdrawl'] += currSum;
+      // acc is an object and we can access that with bracket notation. so this means
+      //acc.despsite or acc.withdrawl::: acc.deposite += currSum OR acc.withdrawl += currSum
+      //acc.deposite += currSum >> this is equal to acc.deposite = acc.deposite + currSum
       return acc; // this means you are compled to retrun acc And it returns the acc object.
     },
     { deposite: 0, withdrawl: 0 }
   );
 // console.log('total:::::', total);
-console.log(deposite, withdrawl);
+console.log('now::', deposite, withdrawl);
 ///////////////////////////////////////
 // Coding Challenge #4
 
