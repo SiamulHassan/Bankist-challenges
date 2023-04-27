@@ -242,3 +242,74 @@ const dogs = [
 
 GOOD LUCK 😀
 */
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+  { weight: 32, curFood: 341, owners: ['Siam', 'Suma'] },
+];
+////////////// prob 1
+dogs.forEach(dog => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28)));
+console.log(dogs);
+
+/////////////////// prob 2
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(
+  `sarah's dog is eating too ${
+    sarahDog.curFood > sarahDog.recFood ? 'much' : 'little'
+  }`
+);
+
+/////////////////// prob 3
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .map(filterKorePawaDogArray => filterKorePawaDogArray.owners)
+  .flat();
+console.log(ownersEatTooMuch);
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(filteredDog => filteredDog.owners);
+// .flat();
+console.log(ownersEatTooLittle);
+
+/////////////////// prob 4
+console.log(`${ownersEatTooMuch.join(' and ')} dogs eat too much`);
+console.log(`${ownersEatTooLittle.join(' and ')} dogs eat too little`);
+
+/////////////////// prob 5
+// some() returns true if any of the array elements satisfy the condition: and ques says any
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+/////////////////// prob 6
+// console.log(
+//   dogs.some(
+//     dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+//   )
+// );
+const checkEatingOk = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+console.log(dogs.some(checkEatingOk));
+/*//////////////////////// explanation
+dogs.some(
+  dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+);
+:::: ata akta function >> (dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1)
+so amra ata akta var e store korte pari>> const checkEatingOk = dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+ar some er moddhe sei fun ke refer kore dilam ...some atake call korbe
+*/
+
+//////////////////////////////////////
+// base on 6 find which dog is eating OK amount of food ::prob 7
+const okDogs = dogs
+  .filter(checkEatingOk)
+  .flatMap(filteredDog => filteredDog.owners);
+// .flat();
+console.log(okDogs);
+
+//////////////////////////////////
+///// prob 8
+// :: Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+// a and b --- a - b is ok when arry is like this [1,2,3,4,5] But here a and b is an object
+const dogsCopy = dogs.slice();
+const sortedDogArr = dogsCopy.sort((a, b) => a.recFood - b.recFood);
+console.log('shallow copy', dogsCopy);
